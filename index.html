@@ -31,25 +31,32 @@
       cursor: pointer;
       margin-top: 30px;
     }
+    #roulette img {
+      max-width: 100px;
+      display: block;
+      margin: 0 auto 10px;
+    }
   </style>
 </head>
 <body>
   <h1>🎁 NFT Рулетка 🎁</h1>
 
-  <!-- Изображение будет вставляться через JS -->
-  <div id="roulette">Готов?</div>
+  <div id="roulette">
+    <img src="https://pbs.twimg.com/media/GiS7CqWXMAA8KMN.jpg" alt="NFT">
+    Готов?
+  </div>
+  
   <button onclick="startRoulette()">Запустить!</button>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const prizes = [
-      '<img src='https://pbs.twimg.com/media/GiS7CqWXMAA8KMN.jpg>'
-      "NFT Робот 🤖",
-      "NFT Самурай 🗡️",
-      "NFT Единорог 🦄",
-      "NFT Дракон 🐲",
-      "NFT Картина 🎨",
-      "NFT Земля 🏞️"
+      '<img src="https://pbs.twimg.com/media/GiS7CqWXMAA8KMN.jpg" alt="NFT Робот"><div>NFT Робот 🤖</div>',
+      '<div>NFT Самурай 🗡️</div>',
+      '<div>NFT Единорог 🦄</div>',
+      '<div>NFT Дракон 🐲</div>',
+      '<div>NFT Картина 🎨</div>',
+      '<div>NFT Земля 🏞️</div>'
     ];
 
     let rouletteInterval;
@@ -70,3 +77,4 @@
   </script>
 </body>
 </html>
+
