@@ -114,7 +114,6 @@
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <!-- Добавь ещё изображения по желанию -->
   </div>
 </div>
 
@@ -132,12 +131,14 @@
   const prizes = [
     "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
     "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
-    // Добавь остальные изображения
+    "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
+    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
   ];
 
   let rouletteInterval;
   let isSpinning = false;
   let cooldown = false;
+  let cooldownTime = 10; // Таймер на 10 секунд
 
   function startRoulette() {
     if (cooldown || isSpinning) return; // Предотвращаем многократное нажатие кнопки
@@ -147,8 +148,8 @@
     let roulette = document.getElementById("roulette");
     let randomIndex = Math.floor(Math.random() * prizes.length);
     let offset = -300; // Начальное смещение
-    let rotations = 25; // Количество поворотов
-    let duration = 5000; // Время крута (5 секунд)
+    let rotations = 20; // Количество поворотов
+    let duration = 7000; // Время крута (7 секунд)
 
     // Запуск рулетки
     roulette.style.transition = "transform " + duration + "ms ease-out";
@@ -161,13 +162,17 @@
       
       // Таймер на 10 секунд перед новым спином
       cooldown = true;
-      setTimeout(() => {
-        cooldown = false;
-        document.getElementById("cooldown").textContent = '';
-      }, 10000);
-
-      // Показываем сообщение "Вы выиграли!"
-      document.getElementById("spin-button").disabled = false;
+      let countdownTimer = setInterval(() => {
+        document.getElementById("cooldown").textContent = `Вы сможете крутить снова через: ${cooldownTime} секунд`;
+        cooldownTime--;
+        if (cooldownTime < 0) {
+          clearInterval(countdownTimer);
+          cooldown = false;
+          document.getElementById("cooldown").textContent = "";
+          document.getElementById("spin-button").disabled = false;
+          cooldownTime = 10; // Сброс таймера
+        }
+      }, 1000);
     }, duration);
 
     // Показываем указатель
@@ -185,5 +190,7 @@
 </script>
 
 </body>
+</html>
+
 </html>
 
