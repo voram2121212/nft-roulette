@@ -15,7 +15,7 @@
       padding: 0;
     }
     #roulette-container {
-      width: 700px; /* Увеличиваем для ПК */
+      width: 1900px; /* Увеличиваем длину рулетки */
       margin: 50px auto;
       overflow: hidden;
       border: none; /* Убираем белый квадрат */
@@ -29,14 +29,14 @@
       will-change: transform;
     }
     .item {
-      min-width: 200px; /* Увеличиваем ширину элементов для ПК */
+      min-width: 300px; /* Увеличиваем ширину элементов */
       margin: 0 10px;
       text-align: center;
       flex-shrink: 0;
     }
     .item img {
-      width: 150px; /* Увеличиваем размер изображений */
-      height: 150px;
+      width: 250px; /* Увеличиваем размер изображений */
+      height: 250px;
       object-fit: cover;
       border-radius: 15px;
       background: transparent;
@@ -81,7 +81,7 @@
       color: gold;
       display: none; /* Таймер скрыт по умолчанию */
     }
-    /* Стиль для указки */
+    /* Стиль для красной указки */
     #pointer {
       position: absolute;
       top: 0;
@@ -90,7 +90,7 @@
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 20px solid gold;
+      border-bottom: 20px solid red; /* Красная указка */
       transform: translateX(-50%);
       z-index: 15; /* Указка сверху рулетки */
       pointer-events: none;
@@ -225,3 +225,4 @@
 
 </body>
 </html>
+
