@@ -28,13 +28,13 @@
       will-change: transform;
     }
     .item {
-      min-width: 300px;
-      margin: 0 10px;
+      min-width: 250px;
+      margin: 0 30px;
       flex-shrink: 0;
     }
     .item img {
-      width: 300px;
-      height: 300px;
+      width: 220px;
+      height: 220px;
       object-fit: cover;
       border-radius: 20px;
       background: transparent;
@@ -113,76 +113,5 @@
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <!-- Добавь ещё изображения по желанию -->
-  </div>
-</div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL
 
-<p id="cooldown"></p>
-
-<button id="spin-button" onclick="startRoulette()">Крутить!</button>
-
-<div id="overlay">
-  <img id="winning-image" src="" alt="Выигрыш!">
-  <h2>Вы выиграли!</h2>
-  <button onclick="resetRoulette()">Закрыть</button>
-</div>
-
-<script>
-  const prizes = [
-    "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
-    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
-    // Добавь остальные изображения
-  ];
-
-  let rouletteInterval;
-  let isSpinning = false;
-  let cooldown = false;
-
-  function startRoulette() {
-    if (cooldown || isSpinning) return; // Предотвращаем многократное нажатие кнопки
-    isSpinning = true;
-    document.getElementById("spin-button").disabled = true;
-
-    let roulette = document.getElementById("roulette");
-    let randomIndex = Math.floor(Math.random() * prizes.length);
-    let offset = -300; // Начальное смещение
-    let rotations = 25; // Количество поворотов
-    let duration = 5000; // Время крута (5 секунд)
-
-    // Запуск рулетки
-    roulette.style.transition = "transform " + duration + "ms ease-out";
-    roulette.style.transform = `translateX(${offset * rotations}px)`;
-
-    setTimeout(() => {
-      // Выбор победного изображения
-      document.getElementById("winning-image").src = prizes[randomIndex];
-      document.getElementById("overlay").style.display = "flex";
-      
-      // Таймер на 10 секунд перед новым спином
-      cooldown = true;
-      setTimeout(() => {
-        cooldown = false;
-        document.getElementById("cooldown").textContent = '';
-      }, 10000);
-
-      // Показываем сообщение "Вы выиграли!"
-      document.getElementById("spin-button").disabled = false;
-    }, duration);
-
-    // Показываем указатель
-    document.getElementById("pointer").style.display = "block";
-  }
-
-  function resetRoulette() {
-    document.getElementById("overlay").style.display = "none";
-    let roulette = document.getElementById("roulette");
-    roulette.style.transition = "none"; // Сбрасываем переходы
-    roulette.style.transform = "translateX(0px)";
-    isSpinning = false;
-    document.getElementById("spin-button").disabled = false;
-  }
-</script>
-
-</body>
-</html>
