@@ -2,79 +2,67 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NFT Рулетка</title>
+  <title>Рулетка Призов</title>
   <style>
     body {
-      background: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px 20px;
-    }
-    h1 {
-      margin-bottom: 30px;
-      font-size: 2em;
+      background: #6a0dad;
+      color: white;
+      font-family: Arial, sans-serif;
     }
     #roulette {
-      margin: 20px auto;
-      font-size: 1.5em;
-      min-height: 50px;
+      display: flex;
+      overflow: hidden;
+      width: 300px;
+      margin: 50px auto;
+      border: 4px solid white;
+      background: #fff;
+      height: 150px;
+      align-items: center;
+    }
+    .item {
+      min-width: 100px;
+      margin: 0 10px;
+      transition: transform 0.5s;
+    }
+    .item img {
+      width: 80px;
+      height: 80px;
     }
     button {
-      padding: 15px 25px;
+      margin-top: 20px;
+      padding: 10px 30px;
       font-size: 18px;
+      background: gold;
       border: none;
-      background-color: #ff4081;
-      color: white;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 30px;
-    }
-    #roulette img {
-      max-width: 100px;
-      display: block;
-      margin: 0 auto 10px;
     }
   </style>
 </head>
 <body>
-  <h1>🎁 NFT Рулетка 🎁</h1>
 
-  <div id="roulette">
-    <img src="https://pbs.twimg.com/media/GiS7CqWXMAA8KMN.jpg" alt="NFT">
-    Готов?
-  </div>
-  
-  <button onclick="startRoulette()">Запустить!</button>
+<h1>Рулетка призов</h1>
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    const prizes = [
-      '<img src="https://pbs.twimg.com/media/GiS7CqWXMAA8KMN.jpg" alt="NFT Робот"><div>NFT Робот 🤖</div>',
-      '<div>NFT Самурай 🗡️</div>',
-      '<div>NFT Единорог 🦄</div>',
-      '<div>NFT Дракон 🐲</div>',
-      '<div>NFT Картина 🎨</div>',
-      '<div>NFT Земля 🏞️</div>'
-    ];
+<div id="roulette">
+  <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
+  <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
+  <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
+  <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
+  <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
+</div>
 
-    let rouletteInterval;
+<button onclick="startRoulette()">Крутить!</button>
 
-    function startRoulette() {
-      let counter = 0;
-      if (rouletteInterval) clearInterval(rouletteInterval);
+<script>
+  function startRoulette() {
+    let roulette = document.getElementById('roulette');
+    let random = Math.floor(Math.random() * 5); // Выбирает случайный элемент
+    let offset = -(random * 120); // Сдвигаем рулетку влево
+    roulette.style.transition = "transform 2s ease-out";
+    roulette.style.transform = translateX(${offset}px);
+  }
+</script>
 
-      rouletteInterval = setInterval(() => {
-        document.getElementById('roulette').innerHTML = prizes[Math.floor(Math.random() * prizes.length)];
-        counter++;
-        if (counter > 20) { // через ~2 секунды остановка
-          clearInterval(rouletteInterval);
-          // можно добавить звук победы или анимацию-
-        }
-      }, 100);
-    }
-  </script>
 </body>
 </html>
-
