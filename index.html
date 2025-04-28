@@ -15,12 +15,12 @@
       padding: 0;
     }
     #roulette-container {
-      width: 1900px;
+      width: 1900px; /* Увеличиваем длину рулетки */
       margin: 50px auto;
       overflow: hidden;
-      border: none;
+      border: none; /* Убираем белый квадрат */
       background: transparent;
-      height: 300px;
+      height: 300px; /* Увеличиваем высоту контейнера рулетки */
       position: relative;
     }
     #roulette {
@@ -29,13 +29,13 @@
       will-change: transform;
     }
     .item {
-      min-width: 300px;
+      min-width: 300px; /* Увеличиваем ширину элементов */
       margin: 0 10px;
       text-align: center;
       flex-shrink: 0;
     }
     .item img {
-      width: 250px;
+      width: 250px; /* Увеличиваем размер изображений */
       height: 250px;
       object-fit: cover;
       border-radius: 15px;
@@ -79,8 +79,9 @@
     #timer {
       font-size: 1.5em;
       color: gold;
-      display: none;
+      display: none; /* Таймер скрыт по умолчанию */
     }
+    /* Стиль для красной указки */
     #pointer {
       position: absolute;
       top: 0;
@@ -89,15 +90,10 @@
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 20px solid red;
+      border-bottom: 20px solid red; /* Красная указка */
       transform: translateX(-50%);
-      z-index: 15;
+      z-index: 15; /* Указка сверху рулетки */
       pointer-events: none;
-    }
-    .item p {
-      font-size: 18px;
-      color: gold;
-      margin-top: 10px;
     }
   </style>
 </head>
@@ -107,15 +103,14 @@
 
 <div id="roulette-container">
   <div id="roulette">
-    <!-- Добавляем новые изображения и "нечего" -->
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"><p>Нечего</p></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"><p>Нечего</p></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"><p>Нечего</p></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"><p>Нечего</p></div>
-    <div class="item"><img src="blob:https://web.telegram.org/8ab49a60-5517-4b3e-a3e3-c2c93bb34c39"><p>Нечего</p></div>
-    <div class="item"><img src="blob:https://web.telegram.org/437e9c2d-72b0-4c57-8756-b7907841d575"><p>Нечего</p></div>
-    <div class="item"><img src="blob:https://web.telegram.org/cafa0a40-893a-4fe2-a1df-f18012a50a80"><p>Нечего</p></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
   </div>
+  <!-- Указка в центре -->
   <div id="pointer"></div>
 </div>
 
@@ -136,7 +131,7 @@
   let timerElement = document.getElementById('timer');
   let pointer = document.getElementById('pointer');
   let position = 0;
-  let speed = 30; 
+  let speed = 30; // начальная скорость
   let spinning = false;
   let animationFrame;
   let timer;
@@ -169,7 +164,7 @@
 
   function gradualStop() {
     cancelAnimationFrame(animationFrame);
-    let deceleration = speed / 100; 
+    let deceleration = speed / 100; // делаем маленькое замедление
     function slowSpin() {
       position -= speed;
       if (position <= -roulette.scrollWidth / 2) {
@@ -209,7 +204,7 @@
 
     // Таймер для обратного отсчета на 10 секунд
     let secondsLeft = 10;
-    timerElement.style.display = 'block';
+    timerElement.style.display = 'block'; // Показываем таймер
     timer = setInterval(function() {
       timerElement.textContent = `Следующий запуск через: ${secondsLeft} секунд`;
       secondsLeft--;
@@ -220,7 +215,7 @@
       }
     }, 1000);
 
-    spinButton.disabled = true;
+    spinButton.disabled = true; // Отключаем кнопку
   }
 
   function closeOverlay() {
@@ -230,4 +225,3 @@
 
 </body>
 </html>
-
