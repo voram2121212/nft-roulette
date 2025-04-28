@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Рулетка Призов</title>
+  <title>Рулетка NFT Подарков</title>
   <style>
     body {
       text-align: center;
@@ -12,12 +12,12 @@
       overflow-x: hidden;
     }
     #roulette-container {
-      width: 300px;
+      width: 320px;
       margin: 50px auto;
       overflow: hidden;
       border: 4px solid white;
-      background: #fff;
-      height: 150px;
+      background: transparent; /* Убираем белый фон */
+      height: 200px;
       position: relative;
     }
     #roulette {
@@ -25,49 +25,52 @@
       align-items: center;
     }
     .item {
-      min-width: 100px;
+      min-width: 140px; /* Больше размер */
       margin: 0 10px;
       text-align: center;
       transition: transform 0.5s;
     }
     .item img {
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
+      width: 120px; /* Увеличиваем сами изображения */
+      height: 120px;
+      object-fit: cover; /* Чтобы изображения были ровные и обрезались красиво */
+      border-radius: 15px;
+      background: #fff; /* Белый фон под самим изображением */
+      padding: 5px;
     }
     button {
       margin-top: 20px;
-      padding: 10px 30px;
-      font-size: 18px;
+      padding: 12px 40px;
+      font-size: 20px;
       background: gold;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
     }
     .highlight {
       border: 4px solid gold;
-      border-radius: 10px;
+      border-radius: 20px;
       padding: 5px;
     }
   </style>
 </head>
 <body>
 
-<h1>Рулетка призов NFT</h1>
+<h1>Рулетка NFT Подарков 🎁</h1>
 
 <div id="roulette-container">
   <div id="roulette">
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg" alt="NFT1"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ" alt="NFT2"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg" alt="NFT3"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ" alt="NFT4"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg" alt="NFT5"></div>
 
-    <!-- Повтор для эффекта прокрутки -->
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <!-- Повтор для плавности прокрутки -->
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ" alt="NFT6"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg" alt="NFT7"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ" alt="NFT8"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg" alt="NFT9"></div>
   </div>
 </div>
 
@@ -78,20 +81,20 @@
     let roulette = document.getElementById('roulette');
     let items = document.querySelectorAll('.item');
     
-    // Снимаем старую подсветку
+    // Убираем старую подсветку
     items.forEach(item => item.classList.remove('highlight'));
     
     let totalItems = items.length;
-    let random = Math.floor(Math.random() * 5); // выбираем 1 из первых 5 призов
-    let fullRounds = 5; // сколько полных прокруток сделать
-    let itemWidth = 120; // ширина одного элемента + отступы
+    let random = Math.floor(Math.random() * 5); // выбираем только среди 5 первых
+    let fullRounds = 5; // количество полных прокруток
+    let itemWidth = 160; // ширина одного блока вместе с отступами
     let finalPosition = (fullRounds * totalItems + random) * itemWidth;
     
-    // Анимация плавная и замедленная
+    // Плавная анимация
     roulette.style.transition = "transform 4s cubic-bezier(0.2, 0.8, 0.4, 1)";
     roulette.style.transform = `translateX(-${finalPosition}px)`;
     
-    // После остановки выделяем выигравший элемент
+    // Выделить победителя после прокрутки
     setTimeout(() => {
       let selectedIndex = random;
       let selectedItem = document.querySelectorAll('.item')[selectedIndex];
