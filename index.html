@@ -17,35 +17,27 @@
     #roulette-container {
       position: relative;
       width: 100%;
+      overflow: hidden;
       height: 300px;
       margin-top: 60px;
-      background: transparent;
-      overflow: hidden;
+      background: #fff;
     }
     #roulette {
       display: flex;
-      flex-wrap: nowrap;
+      align-items: center;
       will-change: transform;
-      animation: roll 12s linear infinite;
-    }
-    @keyframes roll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
     }
     .item {
-      min-width: 1600px;
-      margin: 0;
+      min-width: 300px;
+      margin: 0 10px;
       flex-shrink: 0;
     }
     .item img {
-      width: 1600px;
+      width: 300px;
       height: 300px;
       object-fit: cover;
       border-radius: 20px;
+      background: transparent;
     }
     button {
       margin-top: 30px;
@@ -94,13 +86,13 @@
     }
     #pointer {
       position: absolute;
-      top: -40px;
+      top: -20px;
       left: 50%;
-      transform: translateX(-50%) rotate(180deg);
+      transform: translateX(-50%);
       width: 0; 
       height: 0; 
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
       border-bottom: 30px solid red;
       z-index: 5;
     }
@@ -118,14 +110,11 @@
 <div id="roulette-container">
   <div id="pointer"></div>
   <div id="roulette">
-    <!-- Дублируем изображения для бесконечной прокрутки -->
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <!-- Повторяем картинки, чтобы рулетка не завершалась -->
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <!-- Добавь ещё изображения по желанию -->
   </div>
 </div>
 
@@ -142,51 +131,56 @@
 <script>
   const prizes = [
     "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
-    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
+    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
+    // Добавь остальные изображения
   ];
 
+  let rouletteInterval;
   let isSpinning = false;
   let cooldown = false;
-  let cooldownTime = 10;
 
   function startRoulette() {
-    if (cooldown || isSpinning) return;
+    if (cooldown || isSpinning) return; // Предотвращаем многократное нажатие кнопки
     isSpinning = true;
     document.getElementById("spin-button").disabled = true;
 
     let roulette = document.getElementById("roulette");
     let randomIndex = Math.floor(Math.random() * prizes.length);
+    let offset = -300; // Начальное смещение
+    let rotations = 25; // Количество поворотов
+    let duration = 5000; // Время крута (5 секунд)
 
-    // Старт прокрутки
-    roulette.style.transition = "transform 12s ease-out";
-    roulette.style.transform = `translateX(-100%)`;
+    // Запуск рулетки
+    roulette.style.transition = "transform " + duration + "ms ease-out";
+    roulette.style.transform = `translateX(${offset * rotations}px)`;
 
-    // Остановка рулетки с плавным эффектом
     setTimeout(() => {
+      // Выбор победного изображения
       document.getElementById("winning-image").src = prizes[randomIndex];
       document.getElementById("overlay").style.display = "flex";
       
+      // Таймер на 10 секунд перед новым спином
       cooldown = true;
-      let timer = setInterval(() => {
-        cooldownTime--;
-        document.getElementById("cooldown").textContent = `Вы сможете крутить снова через ${cooldownTime} сек`;
-        if (cooldownTime <= 0) {
-          clearInterval(timer);
-          cooldown = false;
-          cooldownTime = 10;
-          document.getElementById("spin-button").disabled = false;
-          document.getElementById("cooldown").textContent = "";
-        }
-      }, 1000);
-    }, 12000); // Рулетка будет крутиться 12 секунд
+      setTimeout(() => {
+        cooldown = false;
+        document.getElementById("cooldown").textContent = '';
+      }, 10000);
+
+      // Показываем сообщение "Вы выиграли!"
+      document.getElementById("spin-button").disabled = false;
+    }, duration);
+
+    // Показываем указатель
+    document.getElementById("pointer").style.display = "block";
   }
 
   function resetRoulette() {
     document.getElementById("overlay").style.display = "none";
     let roulette = document.getElementById("roulette");
-    roulette.style.transition = "none";
-    roulette.style.transform = "translateX(0)";
+    roulette.style.transition = "none"; // Сбрасываем переходы
+    roulette.style.transform = "translateX(0px)";
     isSpinning = false;
+    document.getElementById("spin-button").disabled = false;
   }
 </script>
 
