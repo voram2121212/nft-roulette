@@ -9,20 +9,25 @@
       background: #6a0dad;
       color: white;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
-    #roulette {
-      display: flex;
-      overflow: hidden;
+    #roulette-container {
       width: 300px;
       margin: 50px auto;
+      overflow: hidden;
       border: 4px solid white;
       background: #fff;
       height: 150px;
+      position: relative;
+    }
+    #roulette {
+      display: flex;
       align-items: center;
     }
     .item {
       min-width: 100px;
       margin: 0 10px;
+      text-align: center;
       transition: transform 0.5s;
     }
     .item img {
@@ -38,18 +43,31 @@
       border-radius: 8px;
       cursor: pointer;
     }
+    .highlight {
+      border: 4px solid gold;
+      border-radius: 10px;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
 
 <h1>Рулетка призов</h1>
 
-<div id="roulette">
-  <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
-  <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
-  <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
-  <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
-  <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
+<div id="roulette-container">
+  <div id="roulette">
+    <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
+    <!-- Повторим для эффекта длинной ленты -->
+    <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
+    <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
+  </div>
 </div>
 
 <button onclick="startRoulette()">Крутить!</button>
@@ -57,10 +75,27 @@
 <script>
   function startRoulette() {
     let roulette = document.getElementById('roulette');
-    let random = Math.floor(Math.random() * 5); // Выбирает случайный элемент
-    let offset = -(random * 120); // Сдвигаем рулетку влево
-    roulette.style.transition = "transform 2s ease-out";
-    roulette.style.transform = translateX(${offset}px);
+    let items = document.querySelectorAll('.item');
+    
+    // Снимаем подсветку с предыдущего выбранного
+    items.forEach(item => item.classList.remove('highlight'));
+    
+    let totalItems = items.length;
+    let random = Math.floor(Math.random() * 5); // Выбираем один из первых 5 призов
+    let fullRounds = 5; // Количество полных прокруток
+    let itemWidth = 120; // ширина одного элемента + отступы
+    let finalPosition = (fullRounds * totalItems + random) * itemWidth;
+    
+    // Плавное замедление
+    roulette.style.transition = "transform 4s cubic-bezier(0.2, 0.8, 0.4, 1)";
+    roulette.style.transform = `translateX(-${finalPosition}px)`;
+    
+    // После окончания прокрутки выделяем победный элемент
+    setTimeout(() => {
+      let selectedIndex = random;
+      let selectedItem = document.querySelectorAll('.item')[selectedIndex];
+      selectedItem.classList.add('highlight');
+    }, 4000); // через 4 секунды, когда анимация закончится
   }
 </script>
 
