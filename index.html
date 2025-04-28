@@ -4,24 +4,23 @@
   <meta charset="UTF-8">
   <title>Рулетка NFT</title>
   <style>
-    body {
-      background: #6a0dad;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
+    html, body {
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: #6a0dad;
+      color: white;
+      text-align: center;
+      height: 100%;
     }
     #roulette-container {
-      width: 320px;
-      margin: 50px auto;
-      overflow: hidden;
-      border: 4px solid white;
-      background: transparent;
-      height: 180px;
       position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 300px;
+      margin-top: 60px;
+      background: #fff;
     }
     #roulette {
       display: flex;
@@ -29,22 +28,21 @@
       will-change: transform;
     }
     .item {
-      min-width: 120px;
+      min-width: 300px;
       margin: 0 10px;
-      text-align: center;
       flex-shrink: 0;
     }
     .item img {
-      width: 100px;
-      height: 100px;
+      width: 300px;
+      height: 300px;
       object-fit: cover;
-      border-radius: 15px;
+      border-radius: 20px;
       background: transparent;
     }
     button {
-      margin-top: 20px;
-      padding: 12px 40px;
-      font-size: 20px;
+      margin-top: 30px;
+      padding: 15px 50px;
+      font-size: 22px;
       background: gold;
       border: none;
       border-radius: 10px;
@@ -56,25 +54,52 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      backdrop-filter: blur(8px);
-      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
       flex-direction: column;
       z-index: 10;
+      padding: 20px;
     }
     #overlay img {
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 25px;
       border: 5px solid gold;
       margin-bottom: 20px;
       background: white;
     }
     #overlay h2 {
-      font-size: 2em;
+      font-size: 2.5em;
       color: gold;
+      margin-bottom: 20px;
+    }
+    #overlay button {
+      padding: 12px 30px;
+      font-size: 18px;
+      background: #ff4081;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #pointer {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; 
+      height: 0; 
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid red;
+      z-index: 5;
+    }
+    #cooldown {
+      margin-top: 15px;
+      font-size: 20px;
+      color: lightgray;
     }
   </style>
 </head>
@@ -83,96 +108,82 @@
 <h1>Рулетка NFT 🎁</h1>
 
 <div id="roulette-container">
+  <div id="pointer"></div>
   <div id="roulette">
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <!-- Дублируем -->
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <!-- Добавь ещё изображения по желанию -->
   </div>
 </div>
 
-<button onclick="startRoulette()">Крутить!</button>
+<p id="cooldown"></p>
+
+<button id="spin-button" onclick="startRoulette()">Крутить!</button>
 
 <div id="overlay">
-  <img id="prize-img" src="" alt="Приз">
+  <img id="winning-image" src="" alt="Выигрыш!">
   <h2>Вы выиграли!</h2>
+  <button onclick="resetRoulette()">Закрыть</button>
 </div>
 
 <script>
-  let roulette = document.getElementById('roulette');
-  let overlay = document.getElementById('overlay');
-  let prizeImg = document.getElementById('prize-img');
-  let position = 0;
-  let speed = 30; // начальная скорость
-  let spinning = false;
-  let animationFrame;
+  const prizes = [
+    "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
+    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
+    // Добавь остальные изображения
+  ];
+
+  let rouletteInterval;
+  let isSpinning = false;
+  let cooldown = false;
 
   function startRoulette() {
-    if (spinning) return;
-    spinning = true;
-    position = 0;
-    speed = 30;
+    if (cooldown || isSpinning) return; // Предотвращаем многократное нажатие кнопки
+    isSpinning = true;
+    document.getElementById("spin-button").disabled = true;
 
-    function spin() {
-      position -= speed;
-      if (position <= -roulette.scrollWidth / 2) {
-        position = 0;
-      }
-      roulette.style.transform = `translateX(${position}px)`;
-      animationFrame = requestAnimationFrame(spin);
-    }
+    let roulette = document.getElementById("roulette");
+    let randomIndex = Math.floor(Math.random() * prizes.length);
+    let offset = -300; // Начальное смещение
+    let rotations = 25; // Количество поворотов
+    let duration = 5000; // Время крута (5 секунд)
 
-    spin();
+    // Запуск рулетки
+    roulette.style.transition = "transform " + duration + "ms ease-out";
+    roulette.style.transform = `translateX(${offset * rotations}px)`;
 
     setTimeout(() => {
-      gradualStop();
-    }, 3000);
+      // Выбор победного изображения
+      document.getElementById("winning-image").src = prizes[randomIndex];
+      document.getElementById("overlay").style.display = "flex";
+      
+      // Таймер на 10 секунд перед новым спином
+      cooldown = true;
+      setTimeout(() => {
+        cooldown = false;
+        document.getElementById("cooldown").textContent = '';
+      }, 10000);
+
+      // Показываем сообщение "Вы выиграли!"
+      document.getElementById("spin-button").disabled = false;
+    }, duration);
+
+    // Показываем указатель
+    document.getElementById("pointer").style.display = "block";
   }
 
-  function gradualStop() {
-    cancelAnimationFrame(animationFrame);
-    let deceleration = speed / 100; // делаем маленькое замедление
-    function slowSpin() {
-      position -= speed;
-      if (position <= -roulette.scrollWidth / 2) {
-        position = 0;
-      }
-      roulette.style.transform = `translateX(${position}px)`;
-
-      speed -= deceleration;
-      if (speed > 0.5) {
-        requestAnimationFrame(slowSpin);
-      } else {
-        spinning = false;
-        showPrize();
-      }
-    }
-    slowSpin();
-  }
-
-  function showPrize() {
-    let items = document.querySelectorAll('.item img');
-    let center = window.innerWidth / 2;
-    let minDiff = Infinity;
-    let winnerSrc = '';
-
-    items.forEach(img => {
-      let rect = img.getBoundingClientRect();
-      let imgCenter = rect.left + rect.width / 2;
-      let diff = Math.abs(center - imgCenter);
-      if (diff < minDiff) {
-        minDiff = diff;
-        winnerSrc = img.src;
-      }
-    });
-
-    prizeImg.src = winnerSrc;
-    overlay.style.display = 'flex';
+  function resetRoulette() {
+    document.getElementById("overlay").style.display = "none";
+    let roulette = document.getElementById("roulette");
+    roulette.style.transition = "none"; // Сбрасываем переходы
+    roulette.style.transform = "translateX(0px)";
+    isSpinning = false;
+    document.getElementById("spin-button").disabled = false;
   }
 </script>
 
 </body>
 </html>
+
