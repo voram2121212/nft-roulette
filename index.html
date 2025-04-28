@@ -26,6 +26,15 @@
       will-change: transform;
       transition: transform 10s ease-out;
       flex-wrap: nowrap;
+      animation: roll 10s linear infinite;
+    }
+    @keyframes roll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
     .item {
       min-width: 300px;
@@ -153,32 +162,25 @@
 
     let roulette = document.getElementById("roulette");
     let randomIndex = Math.floor(Math.random() * prizes.length);
-    let offset = -300;
-    let rotations = 20;
-    let duration = 7000;
-
-    roulette.style.transition = "transform " + duration + "ms ease-out";
-    roulette.style.transform = `translateX(${offset * rotations}px)`;
-
+    
+    // Остановка рулетки с плавным эффектом
     setTimeout(() => {
       document.getElementById("winning-image").src = prizes[randomIndex];
       document.getElementById("overlay").style.display = "flex";
       
       cooldown = true;
-      let countdownTimer = setInterval(() => {
-        document.getElementById("cooldown").textContent = `Вы сможете крутить снова через: ${cooldownTime} секунд`;
+      let timer = setInterval(() => {
         cooldownTime--;
-        if (cooldownTime < 0) {
-          clearInterval(countdownTimer);
+        document.getElementById("cooldown").textContent = `Вы сможете крутить снова через ${cooldownTime} сек`;
+        if (cooldownTime <= 0) {
+          clearInterval(timer);
           cooldown = false;
-          document.getElementById("cooldown").textContent = "";
-          document.getElementById("spin-button").disabled = false;
           cooldownTime = 10;
+          document.getElementById("spin-button").disabled = false;
+          document.getElementById("cooldown").textContent = "";
         }
       }, 1000);
-    }, duration);
-
-    document.getElementById("pointer").style.display = "block";
+    }, 10000); // Рулетка будет крутиться 10 секунд
   }
 
   function resetRoulette() {
@@ -193,4 +195,5 @@
 
 </body>
 </html>
+
 
