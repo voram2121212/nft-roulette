@@ -127,8 +127,6 @@
     <!-- Повторяем картинки, чтобы рулетка не завершалась -->
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
   </div>
 </div>
 
@@ -146,11 +144,8 @@
   const prizes = [
     "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
     "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
-    "https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg",
-    "https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3PlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ",
   ];
 
-  let rouletteInterval;
   let isSpinning = false;
   let cooldown = false;
   let cooldownTime = 10;
@@ -162,7 +157,11 @@
 
     let roulette = document.getElementById("roulette");
     let randomIndex = Math.floor(Math.random() * prizes.length);
-    
+
+    // Старт прокрутки
+    roulette.style.transition = "transform 10s ease-out";
+    roulette.style.transform = `translateX(-100%)`;
+
     // Остановка рулетки с плавным эффектом
     setTimeout(() => {
       document.getElementById("winning-image").src = prizes[randomIndex];
@@ -187,13 +186,11 @@
     document.getElementById("overlay").style.display = "none";
     let roulette = document.getElementById("roulette");
     roulette.style.transition = "none";
-    roulette.style.transform = "translateX(0px)";
+    roulette.style.transform = "translateX(0)";
     isSpinning = false;
-    document.getElementById("spin-button").disabled = false;
   }
 </script>
 
 </body>
 </html>
-
 
