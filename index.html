@@ -10,6 +10,9 @@
       font-family: Arial, sans-serif;
       text-align: center;
       overflow-x: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
     }
     #roulette-container {
       width: 320px;
@@ -47,10 +50,31 @@
       border-radius: 10px;
       cursor: pointer;
     }
-    .highlight {
-      border: 4px solid gold;
-      border-radius: 15px;
-      padding: 3px;
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+    #overlay img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 5px solid gold;
+      margin-bottom: 20px;
+      background: white;
+    }
+    #overlay h2 {
+      font-size: 2em;
+      color: gold;
     }
   </style>
 </head>
@@ -64,10 +88,7 @@
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-
-    <!-- Дублируем ещё раз, чтобы бесконечно было -->
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
-    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <!-- Дублируем -->
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
   </div>
@@ -75,81 +96,83 @@
 
 <button onclick="startRoulette()">Крутить!</button>
 
+<div id="overlay">
+  <img id="prize-img" src="" alt="Приз">
+  <h2>Вы выиграли!</h2>
+</div>
+
 <script>
   let roulette = document.getElementById('roulette');
+  let overlay = document.getElementById('overlay');
+  let prizeImg = document.getElementById('prize-img');
   let position = 0;
-  let speed = 20; // начальная скорость
+  let speed = 30; // начальная скорость
   let spinning = false;
-  let slowdown = false;
-  let slowInterval;
+  let animationFrame;
 
   function startRoulette() {
     if (spinning) return;
     spinning = true;
-    slowdown = false;
     position = 0;
-    speed = 20;
+    speed = 30;
 
-    let move = () => {
+    function spin() {
       position -= speed;
-      roulette.style.transform = `translateX(${position}px)`;
-
-      // Бесконечная прокрутка
       if (position <= -roulette.scrollWidth / 2) {
         position = 0;
       }
+      roulette.style.transform = `translateX(${position}px)`;
+      animationFrame = requestAnimationFrame(spin);
+    }
 
-      if (!slowdown) {
-        requestAnimationFrame(move);
-      }
-    };
-    move();
+    spin();
 
-    // Спустя 3 секунды начинаем замедлять
     setTimeout(() => {
-      slowdown = true;
-      slowInterval = setInterval(() => {
-        speed -= 0.5;
-        if (speed <= 0) {
-          clearInterval(slowInterval);
-          spinning = false;
-          highlightWinningItem();
-        } else {
-          position -= speed;
-          roulette.style.transform = `translateX(${position}px)`;
-          if (position <= -roulette.scrollWidth / 2) {
-            position = 0;
-          }
-        }
-      }, 50);
+      gradualStop();
     }, 3000);
   }
 
-  function highlightWinningItem() {
-    let items = document.querySelectorAll('.item');
-    items.forEach(item => item.classList.remove('highlight'));
-    let center = 160; // центр экрана рулетки (половина контейнера)
+  function gradualStop() {
+    cancelAnimationFrame(animationFrame);
+    let deceleration = speed / 100; // делаем маленькое замедление
+    function slowSpin() {
+      position -= speed;
+      if (position <= -roulette.scrollWidth / 2) {
+        position = 0;
+      }
+      roulette.style.transform = `translateX(${position}px)`;
 
+      speed -= deceleration;
+      if (speed > 0.5) {
+        requestAnimationFrame(slowSpin);
+      } else {
+        spinning = false;
+        showPrize();
+      }
+    }
+    slowSpin();
+  }
+
+  function showPrize() {
+    let items = document.querySelectorAll('.item img');
+    let center = window.innerWidth / 2;
     let minDiff = Infinity;
-    let winner = null;
+    let winnerSrc = '';
 
-    items.forEach(item => {
-      let rect = item.getBoundingClientRect();
-      let itemCenter = rect.left + rect.width / 2;
-      let diff = Math.abs(center - itemCenter);
+    items.forEach(img => {
+      let rect = img.getBoundingClientRect();
+      let imgCenter = rect.left + rect.width / 2;
+      let diff = Math.abs(center - imgCenter);
       if (diff < minDiff) {
         minDiff = diff;
-        winner = item;
+        winnerSrc = img.src;
       }
     });
 
-    if (winner) {
-      winner.classList.add('highlight');
-    }
+    prizeImg.src = winnerSrc;
+    overlay.style.display = 'flex';
   }
 </script>
 
 </body>
 </html>
-
-
