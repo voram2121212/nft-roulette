@@ -33,6 +33,7 @@
     .item img {
       width: 80px;
       height: 80px;
+      border-radius: 10px;
     }
     button {
       margin-top: 20px;
@@ -52,21 +53,21 @@
 </head>
 <body>
 
-<h1>Рулетка призов</h1>
+<h1>Рулетка призов NFT</h1>
 
 <div id="roulette-container">
   <div id="roulette">
-    <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
-    <!-- Повторим для эффекта длинной ленты -->
-    <div class="item"><img src="https://via.placeholder.com/80?text=1"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=2"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=3"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=4"></div>
-    <div class="item"><img src="https://via.placeholder.com/80?text=5"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+
+    <!-- Повтор для эффекта прокрутки -->
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
+    <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
+    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
   </div>
 </div>
 
@@ -77,25 +78,25 @@
     let roulette = document.getElementById('roulette');
     let items = document.querySelectorAll('.item');
     
-    // Снимаем подсветку с предыдущего выбранного
+    // Снимаем старую подсветку
     items.forEach(item => item.classList.remove('highlight'));
     
     let totalItems = items.length;
-    let random = Math.floor(Math.random() * 5); // Выбираем один из первых 5 призов
-    let fullRounds = 5; // Количество полных прокруток
+    let random = Math.floor(Math.random() * 5); // выбираем 1 из первых 5 призов
+    let fullRounds = 5; // сколько полных прокруток сделать
     let itemWidth = 120; // ширина одного элемента + отступы
     let finalPosition = (fullRounds * totalItems + random) * itemWidth;
     
-    // Плавное замедление
+    // Анимация плавная и замедленная
     roulette.style.transition = "transform 4s cubic-bezier(0.2, 0.8, 0.4, 1)";
     roulette.style.transform = `translateX(-${finalPosition}px)`;
     
-    // После окончания прокрутки выделяем победный элемент
+    // После остановки выделяем выигравший элемент
     setTimeout(() => {
       let selectedIndex = random;
       let selectedItem = document.querySelectorAll('.item')[selectedIndex];
       selectedItem.classList.add('highlight');
-    }, 4000); // через 4 секунды, когда анимация закончится
+    }, 4000); // через 4 секунды
   }
 </script>
 
