@@ -2,13 +2,13 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Рулетка NFT Подарков</title>
+  <title>Рулетка NFT</title>
   <style>
     body {
-      text-align: center;
       background: #6a0dad;
       color: white;
       font-family: Arial, sans-serif;
+      text-align: center;
       overflow-x: hidden;
     }
     #roulette-container {
@@ -16,27 +16,27 @@
       margin: 50px auto;
       overflow: hidden;
       border: 4px solid white;
-      background: transparent; /* Убираем фон */
+      background: transparent;
       height: 180px;
       position: relative;
     }
     #roulette {
       display: flex;
       align-items: center;
-      animation: none;
       will-change: transform;
     }
     .item {
       min-width: 120px;
       margin: 0 10px;
       text-align: center;
+      flex-shrink: 0;
     }
     .item img {
       width: 100px;
       height: 100px;
       object-fit: cover;
       border-radius: 15px;
-      background: transparent; /* Фон прозрачный */
+      background: transparent;
     }
     button {
       margin-top: 20px;
@@ -52,28 +52,20 @@
       border-radius: 15px;
       padding: 3px;
     }
-
-    /* Анимация для постоянного движения */
-    @keyframes spin {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
   </style>
 </head>
 <body>
 
-<h1>Рулетка NFT Подарков 🎁</h1>
+<h1>Рулетка NFT 🎁</h1>
 
 <div id="roulette-container">
   <div id="roulette">
-    <!-- Список картинок -->
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
-    <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
 
-    <!-- Дублируем для бесконечной прокрутки -->
+    <!-- Дублируем ещё раз, чтобы бесконечно было -->
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
     <div class="item"><img src="https://i.getgems.io/NzU_WpEetL8daGnbSRVDEegF_IpTiIdHh61PVmfFQj8/rs:fill:500:500:1/g:ce/czM6Ly9nZXRnZW1zLXMzL25mdC1jb250ZW50LWNhY2hlL2ltYWdlcy9FUUJHLWc2YWhrQVVHV3BlZldieC1EXzlzUThvV2J2eTZwdXVxNzhVMmM0TlVERlMvODZlNGFkMDUzODNhNTc2Zl8xOTRhOTZjMTdmNQ"></div>
     <div class="item"><img src="https://media.tproger.ru/uploads/2025/02/a090bfe6-b31e-4c73-a991-9d4b01dff329.jpg"></div>
@@ -85,41 +77,79 @@
 
 <script>
   let roulette = document.getElementById('roulette');
+  let position = 0;
+  let speed = 20; // начальная скорость
   let spinning = false;
-  
+  let slowdown = false;
+  let slowInterval;
+
   function startRoulette() {
-    if (spinning) return; // Чтобы не нажимать несколько раз подряд
+    if (spinning) return;
     spinning = true;
-    
-    // Запускаем бесконечную анимацию движения
-    roulette.style.animation = "spin 2s linear infinite";
+    slowdown = false;
+    position = 0;
+    speed = 20;
 
-    // Через несколько секунд остановить
+    let move = () => {
+      position -= speed;
+      roulette.style.transform = `translateX(${position}px)`;
+
+      // Бесконечная прокрутка
+      if (position <= -roulette.scrollWidth / 2) {
+        position = 0;
+      }
+
+      if (!slowdown) {
+        requestAnimationFrame(move);
+      }
+    };
+    move();
+
+    // Спустя 3 секунды начинаем замедлять
     setTimeout(() => {
-      roulette.style.animation = "none";
-      let items = document.querySelectorAll('.item');
-      
-      // Убираем старую подсветку
-      items.forEach(item => item.classList.remove('highlight'));
-      
-      // Рандомный выбор
-      let randomIndex = Math.floor(Math.random() * 5); // среди первых 5 реальных
+      slowdown = true;
+      slowInterval = setInterval(() => {
+        speed -= 0.5;
+        if (speed <= 0) {
+          clearInterval(slowInterval);
+          spinning = false;
+          highlightWinningItem();
+        } else {
+          position -= speed;
+          roulette.style.transform = `translateX(${position}px)`;
+          if (position <= -roulette.scrollWidth / 2) {
+            position = 0;
+          }
+        }
+      }, 50);
+    }, 3000);
+  }
 
-      // Вычисляем сдвиг для остановки красиво
-      let offset = randomIndex * (120 + 20); // ширина + отступы
-      
-      roulette.style.transition = "transform 2s ease-out";
-      roulette.style.transform = `translateX(-${offset}px)`;
-      
-      setTimeout(() => {
-        let selectedItem = document.querySelectorAll('.item')[randomIndex];
-        selectedItem.classList.add('highlight');
-        spinning = false;
-      }, 2000); // после остановки выделить
-    }, 4000); // крутится 4 секунды
+  function highlightWinningItem() {
+    let items = document.querySelectorAll('.item');
+    items.forEach(item => item.classList.remove('highlight'));
+    let center = 160; // центр экрана рулетки (половина контейнера)
+
+    let minDiff = Infinity;
+    let winner = null;
+
+    items.forEach(item => {
+      let rect = item.getBoundingClientRect();
+      let itemCenter = rect.left + rect.width / 2;
+      let diff = Math.abs(center - itemCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        winner = item;
+      }
+    });
+
+    if (winner) {
+      winner.classList.add('highlight');
+    }
   }
 </script>
 
 </body>
 </html>
+
 
